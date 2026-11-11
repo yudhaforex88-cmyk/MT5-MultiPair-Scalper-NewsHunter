@@ -1,0 +1,1 @@
+#ifndef MPNH_PROTECTION_MQH\n#define MPNH_PROTECTION_MQH\n#include <MPNH/Core/MPNH_Types.mqh>\nclass CProtectionManager{private:long m_magic;public:void Init(const long magic){m_magic=magic;}void OnTick(){// TODO: EA-owned positions + unified stop manager\n}void OnTimer(){// TODO: reconcile and account/news guards\n}long Magic()const{return m_magic;}};\n#endif\n

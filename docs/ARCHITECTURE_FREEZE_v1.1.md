@@ -1,0 +1,13 @@
+# Architecture Freeze v1.1
+- Multi-symbol Forex + XAUUSD; M5 execution, M15/M30/H1 context.
+- Signal score threshold 75 research baseline; Trend/Momentum/Structure score; closed candle confirmation is a gate, not double-counted.
+- Entry Quality Gate: freshness, spread, price drift, RR, opposing structure, regime, news/account state.
+- News Hunter MONITOR-ONLY; MT5 calendar/external adapter → normalize/deduplicate → classify → market reaction → predictions/calibration. No execution API.
+- News policy A: preserve healthy positions conditionally; tighten SL as favorable movement permits; close vulnerable positions via Central Protection; emergency close-all only extreme, EA-owned positions.
+- Single Central Risk Manager; dynamic lot is risk-budget constrained; no martingale/grid. Initial research risk 0.25–0.50%, score multiplier candidates 0.75–1.50x, max candidate trade risk 0.75%; daily loss 2%, peak DD 5% are test candidates only.
+- Max 3 EA positions per pair across strategies; aggregate currency/correlation/margin exposure.
+- Unified Stop Manager owns initial SL, BE, structure/ATR/news trailing; never widens risk.
+- ExecutionGateway sole order API owner; idempotency and broker reconciliation required.
+- Account states: READY, ENTRY_DISABLED, PROTECTION_ONLY, DAILY_LIMIT_REACHED, DRAWDOWN_LOCK, EXECUTION_ERROR, DATA_ERROR, EMERGENCY_LOCK. Fail closed.
+- Learning pipeline Research→Candidate→Backtest→OOS→Demo→Audit→explicit approval; no autonomous live changes.
+- Release requires MetaEditor 0 errors/0 warnings, tests, OOS/demo and safety review.
